@@ -14,29 +14,6 @@ router.post('/api', function (req, res, next) {
   res.json({ start: 'This is the POST index' });
 });
 
-/// POST ROUTES ///
-
-// GET request for creating Post
-router.get('/api/post/create', post_controller.post_create_get);
-// POST request for creating Post
-router.post('/api/post/create', post_controller.post_create_post);
-
-// GET request for delete Post
-router.get('api/post/:id/delete', post_controller.post_delete_get);
-// POST request for delete Post
-router.post('api/post/:id/delete', post_controller.post_delete_post);
-
-// GET request for update Post
-router.get('api/post/:id/update', post_controller.post_update_get);
-// POST request for update Post
-router.post('api/post/:id/update', post_controller.post_update_post);
-
-// GET request for one Post
-router.get('api/post/:id', post_controller.post_detail);
-
-// Get request for list of all Posts
-router.get('api/posts', post_controller.post_list);
-
 /// COMMENT ROUTES ///
 
 // GET request for creating Comment
@@ -60,6 +37,29 @@ router.get('api/comment/:id', comment_controller.comment_detail);
 // Get request for list of all Comments
 router.get('api/comments', comment_controller.comment_list);
 
+/// POST ROUTES ///
+
+// GET request for creating Post
+router.get('/api/post/create', post_controller.post_create_get);
+// POST request for creating Post
+router.post('/api/post/create', post_controller.post_create_post);
+
+// GET request for delete Post
+router.get('api/post/:id/delete', post_controller.post_delete_get);
+// POST request for delete Post
+router.post('api/post/:id/delete', post_controller.post_delete_post);
+
+// GET request for update Post
+router.get('api/post/:id/update', post_controller.post_update_get);
+// POST request for update Post
+router.post('api/post/:id/update', post_controller.post_update_post);
+
+// GET request for one Post
+router.get('api/post/:id', post_controller.post_detail);
+
+// Get request for list of all Posts
+router.get('api/posts', post_controller.post_list);
+
 /// USER ROUTES ///
 
 // GET request for creating User
@@ -82,4 +82,5 @@ router.get('api/user/:id', user_controller.user_detail);
 
 // Get request for list of all Users
 router.get('api/users', user_controller.user_list);
+
 module.exports = router;

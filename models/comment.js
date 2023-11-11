@@ -12,7 +12,7 @@ const CommentSchema = new Schema({
     required: true,
   },
 });
-C;
+
 // Virtual for URL
 CommentSchema.virtual('url').get(function () {
   return `/comment/${this._id}`;
