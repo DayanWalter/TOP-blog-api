@@ -23,7 +23,7 @@ router.post('/api/comment/create', comment_controller.comment_create_post);
 
 // GET request for delete Comment
 router.get('api/comment/:id/delete', comment_controller.comment_delete_get);
-// POST request for delete Comment
+// DELETE request for delete Comment
 router.delete(
   'api/comment/:id/delete',
   comment_controller.comment_delete_delete
@@ -31,13 +31,13 @@ router.delete(
 
 // GET request for update Comment
 router.get('api/comment/:id/update', comment_controller.comment_update_get);
-// POST request for update Comment
+// PUT request for update Comment
 router.put('api/comment/:id/update', comment_controller.comment_update_put);
 
 // GET request for one Comment
 router.get('api/comment/:id', comment_controller.comment_detail);
 
-// Get request for list of all Comments
+// GET request for list of all Comments
 router.get('api/comments', comment_controller.comment_list);
 
 /// POST ROUTES ///
@@ -49,12 +49,12 @@ router.post('/api/post/create', post_controller.post_create_post);
 
 // GET request for delete Post
 router.get('api/post/:id/delete', post_controller.post_delete_get);
-// POST request for delete Post
+// DELETE request for delete Post
 router.delete('api/post/:id/delete', post_controller.post_delete_delete);
 
 // GET request for update Post
 router.get('api/post/:id/update', post_controller.post_update_get);
-// POST request for update Post
+// PUT request for update Post
 router.put('api/post/:id/update', post_controller.post_update_put);
 
 // GET request for one Post
@@ -72,12 +72,12 @@ router.post('/api/user/create', user_controller.user_create_post);
 
 // GET request for delete User
 router.get('api/user/:id/delete', user_controller.user_delete_get);
-// POST request for delete User
+// DELETE request for delete User
 router.delete('api/user/:id/delete', user_controller.user_delete_delete);
 
 // GET request for update User
 router.get('api/user/:id/update', user_controller.user_update_get);
-// POST request for update User
+// PUT request for update User
 router.put('api/user/:id/update', user_controller.user_update_put);
 
 // GET request for one User
