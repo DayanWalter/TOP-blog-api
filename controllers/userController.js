@@ -15,14 +15,14 @@ exports.user_create_post = asyncHandler(async (req, res, next) => {
 exports.user_delete_get = asyncHandler(async (req, res, next) => {
   res.json({ user: 'user_delete_get' });
 });
-exports.user_delete_post = asyncHandler(async (req, res, next) => {
-  res.json({ user: 'user_delete_post' });
+exports.user_delete_delete = asyncHandler(async (req, res, next) => {
+  res.json({ user: 'user_delete_delete' });
 });
 exports.user_update_get = asyncHandler(async (req, res, next) => {
   res.json({ user: 'user_update_get' });
 });
-exports.user_update_post = asyncHandler(async (req, res, next) => {
-  res.json({ user: 'user_update_post' });
+exports.user_update_put = asyncHandler(async (req, res, next) => {
+  res.json({ user: 'user_update_put' });
 });
 exports.user_detail = asyncHandler(async (req, res, next) => {
   res.json({ user: 'user_detail' });
