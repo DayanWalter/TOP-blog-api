@@ -6,7 +6,19 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 
+require('dotenv').config();
+
 const app = express();
+
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
+
+const mongoDB = process.env.MONGODB_URI || process.env.DEV_DB_URL;
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 
 app.use(logger('dev'));
 app.use(express.json());
