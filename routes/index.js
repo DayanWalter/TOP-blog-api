@@ -18,16 +18,12 @@ router.post('/api', function (req, res, next) {
 
 // POST request for creating Comment
 router.post('/api/comment/create', comment_controller.comment_post);
-
 // DELETE request for delete Comment
 router.delete('/api/comment/:id/delete', comment_controller.comment_delete);
-
 // PUT request for update Comment
 router.put('/api/comment/:id/update', comment_controller.comment_put);
-
 // GET request for one Comment
 router.get('/api/comment/:id', comment_controller.comment_detail);
-
 // GET request for list of all Comments
 router.get('/api/comments', comment_controller.comment_list);
 
@@ -35,16 +31,12 @@ router.get('/api/comments', comment_controller.comment_list);
 
 // POST request for creating Post
 router.post('/api/post/create', post_controller.post_post);
-
 // DELETE request for delete Post
 router.delete('/api/post/:id/delete', post_controller.post_delete);
-
 // PUT request for update Post
 router.put('/api/post/:id/update', post_controller.post_put);
-
 // GET request for one Post
 router.get('/api/post/:id', post_controller.post_detail);
-
 // Get request for list of all Posts
 router.get('/api/posts', post_controller.post_list);
 
@@ -52,16 +44,12 @@ router.get('/api/posts', post_controller.post_list);
 
 // POST request for creating User
 router.post('/api/user/create', user_controller.user_post);
-
 // DELETE request for delete User
 router.delete('/api/user/:id/delete', user_controller.user_delete);
-
 // PUT request for update User
 router.put('/api/user/:id/update', user_controller.user_put);
-
 // GET request for one User
 router.get('/api/user/:id', user_controller.user_detail);
-
 // Get request for list of all Users
 router.get('/api/users', user_controller.user_list);
 
