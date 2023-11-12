@@ -22,11 +22,10 @@ exports.post_post = asyncHandler(async (req, res, next) => {
 
   res.json({ post });
 });
-
 exports.post_delete = asyncHandler(async (req, res, next) => {
-  await Post.findOneAndDelete({ _id: req.params.id });
+  await Post.findByIdAndDelete(req.params.id);
 
-  res.json({ post: 'post_delete_delete' });
+  res.json({ message: 'Post deleted' });
 });
 
 exports.post_put = asyncHandler(async (req, res, next) => {

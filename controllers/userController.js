@@ -23,9 +23,9 @@ exports.user_post = asyncHandler(async (req, res, next) => {
   res.json({ user: 'user_create_post' });
 });
 exports.user_delete = asyncHandler(async (req, res, next) => {
-  await User.findOneAndDelete({ _id: req.body.userid });
+  await User.findByIdAndDelete(req.params.id);
 
-  res.json({ user: 'user_delete_delete' });
+  res.json({ message: 'User deleted' });
 });
 exports.user_put = asyncHandler(async (req, res, next) => {
   const user = new User({

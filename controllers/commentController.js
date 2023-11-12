@@ -18,15 +18,13 @@ exports.comment_post = asyncHandler(async (req, res, next) => {
     await comment.save();
   }
 
-  res.json({ comment: 'comment_create_post' });
+  res.json({ comment });
 });
-
 exports.comment_delete = asyncHandler(async (req, res, next) => {
-  await Comment.findOneAndDelete({ _id: req.params.id });
+  await Comment.findByIdAndDelete(req.params.id);
 
-  res.json({ comment: 'comment_delete_delete' });
+  res.json({ message: 'Comment deleted' });
 });
-
 exports.comment_put = asyncHandler(async (req, res, next) => {
   const result = validationResult(req);
 
