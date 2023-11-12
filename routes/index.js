@@ -16,23 +16,14 @@ router.post('/api', function (req, res, next) {
 
 /// COMMENT ROUTES ///
 
-// GET request for creating Comment
-router.get('/api/comment/create', comment_controller.comment_create_get);
 // POST request for creating Comment
-router.post('/api/comment/create', comment_controller.comment_create_post);
+router.post('/api/comment/create', comment_controller.comment_post);
 
-// GET request for delete Comment
-router.get('/api/comment/:id/delete', comment_controller.comment_delete_get);
 // DELETE request for delete Comment
-router.delete(
-  '/api/comment/:id/delete',
-  comment_controller.comment_delete_delete
-);
+router.delete('/api/comment/:id/delete', comment_controller.comment_delete);
 
-// GET request for update Comment
-router.get('/api/comment/:id/update', comment_controller.comment_update_get);
 // PUT request for update Comment
-router.put('/api/comment/:id/update', comment_controller.comment_update_put);
+router.put('/api/comment/:id/update', comment_controller.comment_put);
 
 // GET request for one Comment
 router.get('/api/comment/:id', comment_controller.comment_detail);
@@ -42,20 +33,14 @@ router.get('/api/comments', comment_controller.comment_list);
 
 /// POST ROUTES ///
 
-// GET request for creating Post
-router.get('/api/post/create', post_controller.post_create_get);
 // POST request for creating Post
-router.post('/api/post/create', post_controller.post_create_post);
+router.post('/api/post/create', post_controller.post_post);
 
-// GET request for delete Post
-router.get('/api/post/:id/delete', post_controller.post_delete_get);
 // DELETE request for delete Post
-router.delete('/api/post/:id/delete', post_controller.post_delete_delete);
+router.delete('/api/post/:id/delete', post_controller.post_delete);
 
-// GET request for update Post
-router.get('/api/post/:id/update', post_controller.post_update_get);
 // PUT request for update Post
-router.put('/api/post/:id/update', post_controller.post_update_put);
+router.put('/api/post/:id/update', post_controller.post_put);
 
 // GET request for one Post
 router.get('/api/post/:id', post_controller.post_detail);
