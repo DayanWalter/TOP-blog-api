@@ -7,6 +7,7 @@ const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 
 exports.post_post = asyncHandler(async (req, res, next) => {
+  // Validate and Sanitize input
   const result = validationResult(req);
 
   const post = new Post({
@@ -20,14 +21,18 @@ exports.post_post = asyncHandler(async (req, res, next) => {
     await post.save();
   }
 
-  res.json({ post });
+  res.json({ post, message: 'Post postet' });
 });
 exports.post_delete = asyncHandler(async (req, res, next) => {
-  await Post.findByIdAndDelete(req.params.id);
-
-  res.json({ message: 'Post deleted' });
+  const post = await Post.findByIdAndDelete(req.params.id);
+  if (post === null) {
+    // No results.
+    const err = new Error('Post not found');
+    err.status = 404;
+    return next(err);
+  }
+  res.json({ post, message: 'Post deleted' });
 });
-
 exports.post_put = asyncHandler(async (req, res, next) => {
   const result = validationResult(req);
 
@@ -38,8 +43,7 @@ exports.post_put = asyncHandler(async (req, res, next) => {
     _id: req.params.id,
   });
   await Post.findByIdAndUpdate(req.params.id, post, {});
-
-  res.json({ post });
+  res.json({ post, message: 'Post updated' });
 });
 exports.post_detail = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id).populate('user').exec();
@@ -49,10 +53,9 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-  res.json({ post });
+  res.json({ post, message: 'Post detail' });
 });
 exports.post_list = asyncHandler(async (req, res, next) => {
   const allPosts = await Post.find().populate('user').exec();
-
-  res.json({ allPosts });
+  res.json({ allPosts, message: 'All posts' });
 });

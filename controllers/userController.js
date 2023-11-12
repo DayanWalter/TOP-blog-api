@@ -20,36 +20,43 @@ exports.user_post = asyncHandler(async (req, res, next) => {
     await user.save();
   }
 
-  res.json({ user: 'user_create_post' });
+  res.json({ user, message: 'User created' });
 });
 exports.user_delete = asyncHandler(async (req, res, next) => {
-  await User.findByIdAndDelete(req.params.id);
-
-  res.json({ message: 'User deleted' });
-});
-exports.user_put = asyncHandler(async (req, res, next) => {
-  const user = new User({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    isAuthor: req.body.isAuthor,
-    _id: req.body.userid,
-  });
-  await User.findByIdAndUpdate(req.body.userid, user, {});
-  res.json({ user: 'user_update_put' });
-});
-exports.user_detail = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.params.id).exec();
-
+  const user = await User.findByIdAndDelete(req.params.id);
   if (user === null) {
     // No results.
     const err = new Error('User not found');
     err.status = 404;
     return next(err);
   }
-  res.json({ user });
+
+  res.json({ user, message: 'User deleted' });
+});
+exports.user_put = asyncHandler(async (req, res, next) => {
+  const result = validationResult(req);
+
+  const user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    isAuthor: req.body.isAuthor,
+    _id: req.params.id,
+  });
+  await User.findByIdAndUpdate(req.params.id, user, {});
+  res.json({ user, message: 'User updated' });
+});
+exports.user_detail = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id).exec();
+  if (user === null) {
+    // No results.
+    const err = new Error('User not found');
+    err.status = 404;
+    return next(err);
+  }
+  res.json({ user, message: 'User detail' });
 });
 exports.user_list = asyncHandler(async (req, res, next) => {
   const allUser = await User.find().exec();
-  res.json({ allUser });
+  res.json({ allUser, message: 'All users' });
 });

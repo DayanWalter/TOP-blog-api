@@ -7,6 +7,7 @@ const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 
 exports.comment_post = asyncHandler(async (req, res, next) => {
+  // Validate and Sanitize input
   const result = validationResult(req);
 
   const comment = new Comment({
@@ -18,12 +19,18 @@ exports.comment_post = asyncHandler(async (req, res, next) => {
     await comment.save();
   }
 
-  res.json({ comment });
+  res.json({ comment, message: 'Comment postet' });
 });
 exports.comment_delete = asyncHandler(async (req, res, next) => {
-  await Comment.findByIdAndDelete(req.params.id);
+  const comment = await Comment.findByIdAndDelete(req.params.id);
+  if (comment === null) {
+    // No results.
+    const err = new Error('Comment not found');
+    err.status = 404;
+    return next(err);
+  }
 
-  res.json({ message: 'Comment deleted' });
+  res.json({ comment, message: 'Comment deleted' });
 });
 exports.comment_put = asyncHandler(async (req, res, next) => {
   const result = validationResult(req);
@@ -34,8 +41,7 @@ exports.comment_put = asyncHandler(async (req, res, next) => {
     _id: req.params.id,
   });
   await Comment.findByIdAndUpdate(req.params.id, comment, {});
-
-  res.json({ comment: 'comment_update_put' });
+  res.json({ comment, message: 'Comment updated' });
 });
 exports.comment_detail = asyncHandler(async (req, res, next) => {
   const comment = await Comment.findById(req.params.id).populate('user').exec();
@@ -45,10 +51,9 @@ exports.comment_detail = asyncHandler(async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-  res.json({ comment });
+  res.json({ comment, message: 'Comment detail' });
 });
 exports.comment_list = asyncHandler(async (req, res, next) => {
   const allComments = await Comment.find().populate('user').exec();
-
-  res.json({ allComments });
+  res.json({ allComments, message: 'All comments' });
 });
