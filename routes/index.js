@@ -65,20 +65,14 @@ router.get('/api/posts', post_controller.post_list);
 
 /// USER ROUTES ///
 
-// GET request for creating User
-router.get('/api/user/create', user_controller.user_create_get);
 // POST request for creating User
-router.post('/api/user/create', user_controller.user_create_post);
+router.post('/api/user/create', user_controller.user_post);
 
-// GET request for delete User
-router.get('/api/user/:id/delete', user_controller.user_delete_get);
 // DELETE request for delete User
-router.delete('/api/user/:id/delete', user_controller.user_delete_delete);
+router.delete('/api/user/:id/delete', user_controller.user_delete);
 
-// GET request for update User
-router.get('/api/user/:id/update', user_controller.user_update_get);
 // PUT request for update User
-router.put('/api/user/:id/update', user_controller.user_update_put);
+router.put('/api/user/:id/update', user_controller.user_put);
 
 // GET request for one User
 router.get('/api/user/:id', user_controller.user_detail);

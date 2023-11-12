@@ -6,10 +6,7 @@ const { body, validationResult } = require('express-validator');
 
 const asyncHandler = require('express-async-handler');
 
-exports.user_create_get = asyncHandler(async (req, res, next) => {
-  res.json({ user: 'user_create_get' });
-});
-exports.user_create_post = asyncHandler(async (req, res, next) => {
+exports.user_post = asyncHandler(async (req, res, next) => {
   // Validate and Sanitize input
   const result = validationResult(req);
 
@@ -25,18 +22,12 @@ exports.user_create_post = asyncHandler(async (req, res, next) => {
 
   res.json({ user: 'user_create_post' });
 });
-exports.user_delete_get = asyncHandler(async (req, res, next) => {
-  res.json({ user: 'user_delete_get' });
-});
-exports.user_delete_delete = asyncHandler(async (req, res, next) => {
+exports.user_delete = asyncHandler(async (req, res, next) => {
   await User.findOneAndDelete({ _id: req.body.userid });
 
   res.json({ user: 'user_delete_delete' });
 });
-exports.user_update_get = asyncHandler(async (req, res, next) => {
-  res.json({ user: 'user_update_get' });
-});
-exports.user_update_put = asyncHandler(async (req, res, next) => {
+exports.user_put = asyncHandler(async (req, res, next) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
