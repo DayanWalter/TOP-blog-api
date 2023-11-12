@@ -12,7 +12,7 @@ const UserSchema = new Schema({
   },
   email: { type: String, unique: true },
   password: { type: String, required: true },
-  isAuthor: { type: Boolean },
+  isAuthor: { type: Boolean, default: false },
 });
 
 // Virtual for URL

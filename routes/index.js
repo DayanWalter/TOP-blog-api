@@ -53,4 +53,7 @@ router.get('/api/user/:id', user_controller.user_detail);
 // Get request for list of all Users
 router.get('/api/users', user_controller.user_list);
 
+// POST request for User Login
+router.post('/api/user/login', user_controller.user_login);
+
 module.exports = router;
