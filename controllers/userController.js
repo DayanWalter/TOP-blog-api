@@ -10,6 +10,18 @@ exports.user_create_get = asyncHandler(async (req, res, next) => {
   res.json({ user: 'user_create_get' });
 });
 exports.user_create_post = asyncHandler(async (req, res, next) => {
+  const result = validationResult(req);
+
+  const user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    isAuthor: req.body.isAuthor,
+  });
+  if (result.isEmpty()) {
+    await user.save();
+  }
+
   res.json({ user: 'user_create_post' });
 });
 exports.user_delete_get = asyncHandler(async (req, res, next) => {

@@ -10,6 +10,16 @@ exports.comment_create_get = asyncHandler(async (req, res, next) => {
   res.json({ comment: 'comment_create_get' });
 });
 exports.comment_create_post = asyncHandler(async (req, res, next) => {
+  const result = validationResult(req);
+
+  const comment = new Comment({
+    text: req.body.text,
+    timestamp: new Date().toLocaleString('en-US'),
+  });
+  if (result.isEmpty()) {
+    await comment.save();
+  }
+
   res.json({ comment: 'comment_create_post' });
 });
 exports.comment_delete_get = asyncHandler(async (req, res, next) => {
