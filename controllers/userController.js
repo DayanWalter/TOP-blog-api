@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 
 const asyncHandler = require('express-async-handler');
+const passport = require('passport');
 
 exports.user_post = asyncHandler(async (req, res, next) => {
   // Validate and Sanitize input

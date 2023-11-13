@@ -5,6 +5,9 @@ const comment_controller = require('../controllers/commentController');
 const post_controller = require('../controllers/postController');
 const user_controller = require('../controllers/userController');
 
+const passport = require('passport');
+const protectedRoute = passport.authenticate('jwt', { session: false });
+
 // GET home page
 router.get('/api', function (req, res, next) {
   res.json({ start: 'This is the GET index' });
@@ -51,7 +54,7 @@ router.put('/api/user/:id/update', user_controller.user_put);
 // GET request for one User
 router.get('/api/user/:id', user_controller.user_detail);
 // Get request for list of all Users
-router.get('/api/users', user_controller.user_list);
+router.get('/api/users', protectedRoute, user_controller.user_list);
 
 // POST request for User Login
 router.post('/api/user/login', user_controller.user_login);
