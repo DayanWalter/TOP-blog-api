@@ -12,19 +12,22 @@ const passport = require('passport');
 exports.user_post = asyncHandler(async (req, res, next) => {
   // Validate and Sanitize input
   const result = validationResult(req);
-
-  bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-    const user = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword,
-      isAuthor: req.body.isAuthor,
+  if (req.body.authorIdentification === 'true') {
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+      const user = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: hashedPassword,
+        isAuthor: true,
+      });
+      if (result.isEmpty()) {
+        await user.save();
+      }
+      res.json({ user, message: 'Author created' });
     });
-    if (result.isEmpty()) {
-      await user.save();
-    }
-    res.json({ user, message: 'User created' });
-  });
+  } else {
+    res.json({ message: 'Author Identification failed' });
+  }
 });
 exports.user_delete = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndDelete(req.params.id);
@@ -69,7 +72,7 @@ exports.user_login = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({ username });
   //This lookup would normally be done using a database
-  if (user) {
+  if (user && user.isAuthor === true) {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (isPasswordValid) {
       //the password compare would normally be done using bcrypt.
