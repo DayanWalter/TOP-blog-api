@@ -22,37 +22,57 @@ router.post('/api', function (req, res, next) {
 // POST request for creating Comment
 router.post('/api/comment/create', comment_controller.comment_post);
 // DELETE request for delete Comment
-router.delete('/api/comment/:id/delete', comment_controller.comment_delete);
+router.delete(
+  '/api/comment/:id/delete',
+  protectedRoute,
+  comment_controller.comment_delete
+);
 // PUT request for update Comment
-router.put('/api/comment/:id/update', comment_controller.comment_put);
+router.put(
+  '/api/comment/:id/update',
+  protectedRoute,
+  comment_controller.comment_put
+);
 // GET request for one Comment
-router.get('/api/comment/:id', comment_controller.comment_detail);
+router.get(
+  '/api/comment/:id',
+  protectedRoute,
+  comment_controller.comment_detail
+);
 // GET request for list of all Comments
-router.get('/api/comments', comment_controller.comment_list);
+router.get('/api/comments', protectedRoute, comment_controller.comment_list);
 
 /// POST ROUTES ///
 
 // POST request for creating Post
-router.post('/api/post/create', post_controller.post_post);
+router.post('/api/post/create', protectedRoute, post_controller.post_post);
 // DELETE request for delete Post
-router.delete('/api/post/:id/delete', post_controller.post_delete);
+router.delete(
+  '/api/post/:id/delete',
+  protectedRoute,
+  post_controller.post_delete
+);
 // PUT request for update Post
-router.put('/api/post/:id/update', post_controller.post_put);
+router.put('/api/post/:id/update', protectedRoute, post_controller.post_put);
 // GET request for one Post
-router.get('/api/post/:id', post_controller.post_detail);
+router.get('/api/post/:id', protectedRoute, post_controller.post_detail);
 // Get request for list of all Posts
-router.get('/api/posts', post_controller.post_list);
+router.get('/api/posts', protectedRoute, post_controller.post_list);
 
 /// USER ROUTES ///
 
 // POST request for creating User
 router.post('/api/user/create', user_controller.user_post);
 // DELETE request for delete User
-router.delete('/api/user/:id/delete', user_controller.user_delete);
+router.delete(
+  '/api/user/:id/delete',
+  protectedRoute,
+  user_controller.user_delete
+);
 // PUT request for update User
-router.put('/api/user/:id/update', user_controller.user_put);
+router.put('/api/user/:id/update', protectedRoute, user_controller.user_put);
 // GET request for one User
-router.get('/api/user/:id', user_controller.user_detail);
+router.get('/api/user/:id', protectedRoute, user_controller.user_detail);
 // Get request for list of all Users
 router.get('/api/users', protectedRoute, user_controller.user_list);
 
