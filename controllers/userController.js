@@ -1,7 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 const User = require('../models/user');
-
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const { body, validationResult } = require('express-validator');
@@ -64,5 +64,23 @@ exports.user_list = asyncHandler(async (req, res, next) => {
   res.json({ allUser, message: 'All users' });
 });
 exports.user_login = asyncHandler(async (req, res, next) => {
-  res.json({ login: 'This is the login POST' });
+  const { username, password } = req.body;
+
+  const user = await User.findOne({ username });
+  //This lookup would normally be done using a database
+  if (user) {
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (isPasswordValid) {
+      //the password compare would normally be done using bcrypt.
+      const opts = {};
+      //token expires in 20sec
+      const secret = 'SECRET_KEY'; //normally stored in process.env.secret
+      const token = jwt.sign({ username }, secret, opts);
+      return res.status(200).json({
+        message: 'Auth Passed',
+        token,
+      });
+    }
+  }
+  return res.status(401).json({ message: 'Auth Failed' });
 });

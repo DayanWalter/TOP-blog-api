@@ -4,12 +4,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const User = require('./models/user');
+const bcrypt = require('bcryptjs');
+const indexRouter = require('./routes/index');
 
 const passport = require('passport');
-
-const bcrypt = require('bcryptjs');
-
-const indexRouter = require('./routes/index');
+const jwtStrategy = require('./strategies/jwt');
+passport.use(jwtStrategy);
 
 require('dotenv').config();
 
