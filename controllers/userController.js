@@ -3,7 +3,6 @@ const Post = require('../models/post');
 const User = require('../models/user');
 
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 const { body, validationResult } = require('express-validator');
 
@@ -65,6 +64,5 @@ exports.user_list = asyncHandler(async (req, res, next) => {
   res.json({ allUser, message: 'All users' });
 });
 exports.user_login = asyncHandler(async (req, res, next) => {
-  // jwt.sign();
-  res.json('User_login');
+  res.json({ login: 'This is the login POST' });
 });
