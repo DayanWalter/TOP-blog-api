@@ -1,4 +1,6 @@
 import DataFetch from './DataFetch';
+import styles from './Comments.module.css';
+
 import Comment from './Comment';
 export default function Comments({ postid }) {
   const { loading, data, error } = DataFetch(
@@ -11,7 +13,7 @@ export default function Comments({ postid }) {
         <div>{`There is a problem fetching the data - ${error.message}`}</div>
       )}
       {data && (
-        <div>
+        <div className={styles.comments}>
           <ul>
             <p>Comments:</p>
             {data.allComments.map(
