@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import DataFetch from './DataFetch';
+import { useState } from 'react';
+import './Login.css';
 
-function App() {
+function Login() {
   // Save input from form
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
-
-  // Save jwt token
-  const [jwtToken, setJwtToken] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,8 +31,9 @@ function App() {
 
       if (response.ok) {
         const json = await response.json();
-        setJwtToken(json.token); // Speichere den Token im Zustand
-        console.log('Successful login', json); // Hier ist die JSON-Antwort nach dem Einreichen des Formulars
+        // save jwt in localstorage
+        localStorage.setItem('jwtoken', json.token);
+        console.log('Successful login', json);
       } else {
         console.error('Failed to login');
       }
@@ -71,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;
