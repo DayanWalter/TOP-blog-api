@@ -1,6 +1,4 @@
 const Comment = require('../models/comment');
-const Post = require('../models/post');
-const User = require('../models/user');
 
 const { body, validationResult } = require('express-validator');
 
@@ -11,9 +9,10 @@ exports.comment_post = asyncHandler(async (req, res, next) => {
   const result = validationResult(req);
 
   const comment = new Comment({
+    user: req.body.user,
     text: req.body.text,
     timestamp: new Date().toLocaleString('en-US'),
-    user: req.body.user,
+    post: req.params.postid,
   });
   if (result.isEmpty()) {
     await comment.save();
@@ -22,7 +21,7 @@ exports.comment_post = asyncHandler(async (req, res, next) => {
   res.json({ comment, message: 'Comment postet' });
 });
 exports.comment_delete = asyncHandler(async (req, res, next) => {
-  const comment = await Comment.findByIdAndDelete(req.params.id);
+  const comment = await Comment.findByIdAndDelete(req.params.commentid);
   if (comment === null) {
     // No results.
     const err = new Error('Comment not found');
@@ -36,15 +35,17 @@ exports.comment_put = asyncHandler(async (req, res, next) => {
   const result = validationResult(req);
 
   const comment = new Comment({
-    text: req.body.text,
     user: req.body.user,
-    _id: req.params.id,
+    text: req.body.text,
+    _id: req.params.commentid,
   });
-  await Comment.findByIdAndUpdate(req.params.id, comment, {});
+  await Comment.findByIdAndUpdate(req.params.commentid, comment, {});
   res.json({ comment, message: 'Comment updated' });
 });
 exports.comment_detail = asyncHandler(async (req, res, next) => {
-  const comment = await Comment.findById(req.params.id).populate('user').exec();
+  const comment = await Comment.findById(req.params.commentid)
+    .populate('post')
+    .exec();
   if (comment === null) {
     // No results.
     const err = new Error('Comment not found');
@@ -54,6 +55,6 @@ exports.comment_detail = asyncHandler(async (req, res, next) => {
   res.json({ comment, message: 'Comment detail' });
 });
 exports.comment_list = asyncHandler(async (req, res, next) => {
-  const allComments = await Comment.find().populate('user').exec();
+  const allComments = await Comment.find().populate('post').exec();
   res.json({ allComments, message: 'All comments' });
 });

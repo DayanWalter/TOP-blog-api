@@ -20,22 +20,25 @@ router.post('/api', function (req, res, next) {
 /// COMMENT ROUTES ///
 
 // POST request for creating Comment
-router.post('/api/comment/create', comment_controller.comment_post);
+router.post(
+  '/api/post/:postid/comment/create',
+  comment_controller.comment_post
+);
 // DELETE request for delete Comment
 router.delete(
-  '/api/comment/:id/delete',
+  '/api/post/:postid/comment/:commentid/delete',
   protectedRoute,
   comment_controller.comment_delete
 );
 // PUT request for update Comment
 router.put(
-  '/api/comment/:id/update',
+  '/api/post/:postid/comment/:commentid/update',
   protectedRoute,
   comment_controller.comment_put
 );
 // GET request for one Comment
 router.get(
-  '/api/comment/:id',
+  '/api/post/:postid/comment/:commentid',
   protectedRoute,
   comment_controller.comment_detail
 );

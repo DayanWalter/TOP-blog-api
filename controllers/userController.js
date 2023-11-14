@@ -1,5 +1,3 @@
-const Comment = require('../models/comment');
-const Post = require('../models/post');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -7,13 +5,13 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 
 const asyncHandler = require('express-async-handler');
-const passport = require('passport');
 
 exports.user_post = asyncHandler(async (req, res, next) => {
   // Validate and Sanitize input
   const result = validationResult(req);
-
+  // if the input from "authorIdentification" is "secretpassword"...
   if (req.body.authorIdentification === 'secretpassword') {
+    // ...create user with hashedPassword
     bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
       const user = new User({
         username: req.body.username,
@@ -21,6 +19,7 @@ exports.user_post = asyncHandler(async (req, res, next) => {
         password: hashedPassword,
         isAuthor: true,
       });
+      // If there are no validation Errors, save user in DB
       if (result.isEmpty()) {
         await user.save();
       }
