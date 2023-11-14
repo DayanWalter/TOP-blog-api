@@ -2,32 +2,25 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  // const [daten, setDaten] = useState({});
+  // Save input from form
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:3000/api', {
-  //         mode: 'cors',
-  //       });
-  //       const data = await response.json();
-  //       setDaten(data);
-  //     } catch (error) {
-  //       console.error('Fehler beim Abrufen der Daten:', error);
-  //     }
-  //   };
+  // Save jwt token
+  const [jwtToken, setJwtToken] = useState(null);
 
-  //   fetchData();
-  // }, []);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // const formData = new FormData(event.target);
-    // console.log(formData);
-    const formData = {
-      username: 'Admin',
-      password: '123',
-    };
 
     try {
       const response = await fetch('http://localhost:3000/api/user/login', {
@@ -40,12 +33,13 @@ function App() {
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json); // Hier ist die JSON-Antwort nach dem Einreichen des Formulars
+        setJwtToken(json.token); // Speichere den Token im Zustand
+        console.log('Successful login', json); // Hier ist die JSON-Antwort nach dem Einreichen des Formulars
       } else {
-        console.error('Fehler beim Anmelden');
+        console.error('Failed to login');
       }
     } catch (error) {
-      console.error('Fehler:', error);
+      console.error('Error:', error);
     }
   };
 
@@ -55,9 +49,21 @@ function App() {
         <h1>Welcome to the Authors Page</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+          />
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
           <button type="submit">Submit</button>
         </form>
       </div>
