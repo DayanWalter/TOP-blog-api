@@ -12,7 +12,8 @@ const passport = require('passport');
 exports.user_post = asyncHandler(async (req, res, next) => {
   // Validate and Sanitize input
   const result = validationResult(req);
-  if (req.body.authorIdentification === 'true') {
+
+  if (req.body.authorIdentification === 'secretpassword') {
     bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
       const user = new User({
         username: req.body.username,
@@ -69,16 +70,18 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 });
 exports.user_login = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
-
+  // Fetch the user from DB
   const user = await User.findOne({ username });
-  //This lookup would normally be done using a database
+  // If user is found and an author...
   if (user && user.isAuthor === true) {
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (isPasswordValid) {
-      //the password compare would normally be done using bcrypt.
+    // compare the password from the input with the database via bcrypt
+    const passwordIsValid = await bcrypt.compare(password, user.password);
+    // If the passwords are the same...
+    if (passwordIsValid) {
       const opts = {};
-      //token expires in 20sec
-      const secret = 'SECRET_KEY'; //normally stored in process.env.secret
+      // TODO: Store key in process.env.secret
+      const secret = 'SECRET_KEY';
+      // ..create a token with opts, the secret and the username
       const token = jwt.sign({ username }, secret, opts);
       return res.status(200).json({
         message: 'Auth Passed',
@@ -86,5 +89,6 @@ exports.user_login = asyncHandler(async (req, res, next) => {
       });
     }
   }
+  // if the user is not in the DB or not an author send "auth failed"
   return res.status(401).json({ message: 'Auth Failed' });
 });
