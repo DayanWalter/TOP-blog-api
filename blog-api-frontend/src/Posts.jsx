@@ -13,7 +13,8 @@ export default function Posts() {
         <div>
           {data.allPosts.map(({ title, text, _id }) => (
             <li key={_id}>
-              <Post title={title} text={text} />
+              {console.log(`Post:${_id}`)}
+              <Post title={title} text={text} postid={_id} />
             </li>
           ))}
         </div>
