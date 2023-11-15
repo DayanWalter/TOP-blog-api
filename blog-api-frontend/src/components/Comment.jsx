@@ -7,9 +7,6 @@ export default function Comment({ text, user }) {
         <p>{user} said:</p>
         <p>{text}</p>
       </div>
-      <br />
-      <hr />
-      <br />
     </>
   );
 }

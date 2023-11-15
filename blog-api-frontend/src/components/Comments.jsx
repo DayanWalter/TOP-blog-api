@@ -3,8 +3,9 @@ import styles from './Comments.module.css';
 
 import Comment from './Comment';
 import { useState } from 'react';
+
 export default function Comments({ postid }) {
-  const { loading, data, error } = DataFetch(
+  const { loading, data, error, refetch } = DataFetch(
     'http://localhost:3000/api/comments'
   );
 
@@ -25,7 +26,7 @@ export default function Comments({ postid }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+
     try {
       const response = await fetch(
         `http://localhost:3000/api/post/${postid}/comment/create`,
@@ -41,6 +42,13 @@ export default function Comments({ postid }) {
       if (response.ok) {
         const json = await response.json();
         console.log(json);
+
+        setFormData({
+          user: '',
+          text: '',
+          post: '',
+        });
+        refetch();
       } else {
         console.error('Failed to comment');
       }
@@ -57,7 +65,30 @@ export default function Comments({ postid }) {
       )}
       {data && (
         <div className={styles.comments}>
+          <p>Add comment:</p>
+          <form onSubmit={handleSubmit} action="/">
+            <input
+              type="text"
+              id="text"
+              name="text"
+              value={formData.text}
+              onChange={handleChange}
+              placeholder="Text"
+            />
+            <br />
+            <input
+              type="text"
+              id="user"
+              name="user"
+              value={formData.user}
+              onChange={handleChange}
+              placeholder="Name"
+            />
+            <br />
+            <button type="submit">Send</button>
+          </form>
           <p>Comments:</p>
+
           <ul>
             {data.allComments.map(
               ({ text, user, _id, post }) =>
@@ -68,26 +99,6 @@ export default function Comments({ postid }) {
                 )
             )}
           </ul>
-
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              id="text"
-              name="text"
-              value={formData.text}
-              onChange={handleChange}
-              placeholder="Text"
-            />
-            <input
-              type="text"
-              id="user"
-              name="user"
-              value={formData.user}
-              onChange={handleChange}
-              placeholder="Name"
-            />
-            <button type="submit">Send</button>
-          </form>
         </div>
       )}
     </>

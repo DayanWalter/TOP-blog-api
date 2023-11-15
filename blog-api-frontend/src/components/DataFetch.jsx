@@ -5,25 +5,32 @@ export default function DataFetch(url) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`This is an HTTP error`);
-        }
-        let actualData = await response.json();
-        setData(actualData);
-        setError(null);
-      } catch (err) {
-        setError(err);
-        setData(null);
-      } finally {
-        setLoading(false);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`This is an HTTP error`);
       }
+      let actualData = await response.json();
+      setData(actualData);
+      setError(null);
+    } catch (err) {
+      setError(err);
+      setData(null);
+    } finally {
+      setLoading(false);
     }
-    getData();
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [url]);
 
-  return { data, loading, error };
+  const refetch = () => {
+    // Manuell Fetch auslösen
+    setLoading(true);
+    fetchData();
+  };
+
+  return { data, loading, error, refetch };
 }

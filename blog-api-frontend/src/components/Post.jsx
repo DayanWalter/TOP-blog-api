@@ -37,6 +37,7 @@ export default function Post() {
             <h1>{data.post.title}</h1>
 
             <h3>{data.post.text}</h3>
+            <Comments postid={postid} />
           </div>
           <div className={styles.right}>
             <p>written by:</p>
@@ -46,10 +47,6 @@ export default function Post() {
             <br />
             <p>written at:</p>
             <p>{data.post.timestamp}</p>
-            <br />
-            <hr />
-            <br />
-            <Comments postid={postid} />
           </div>
         </>
       )}
