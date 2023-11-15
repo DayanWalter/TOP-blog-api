@@ -2,6 +2,7 @@ import DataFetch from './DataFetch';
 import { useLoaderData } from 'react-router-dom';
 
 import styles from './Post.module.css';
+import Comments from './Comments';
 export default function Post() {
   const loaderData = useLoaderData();
   const postid = loaderData.postid;
@@ -45,6 +46,10 @@ export default function Post() {
             <br />
             <p>written at:</p>
             <p>{data.post.timestamp}</p>
+            <br />
+            <hr />
+            <br />
+            <Comments postid={postid} />
           </div>
         </>
       )}

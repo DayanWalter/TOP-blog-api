@@ -20,7 +20,6 @@ export default function Comments({ postid }) {
               ({ text, user, _id, post }) =>
                 post._id === postid && (
                   <li key={_id}>
-                    {console.log(`PostId in Comment${post._id} ${postid}`)}
                     <Comment text={text} user={user} />
                   </li>
                 )
