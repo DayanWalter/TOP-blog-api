@@ -53,7 +53,7 @@ router.put('/api/post/:id/update', post_controller.post_put);
 // GET request for one Post
 router.get('/api/post/:id', post_controller.post_detail);
 // Get request for list of all Posts
-router.get('/api/posts', post_controller.post_list);
+router.get('/api/posts', protectedRoute, post_controller.post_list);
 
 /// USER ROUTES ///
 

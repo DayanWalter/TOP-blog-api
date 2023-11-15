@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+.formContainer {
+  /* border: 1px solid blue; */
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+}
+.loginform {
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  font-size: 32px;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+.loginform input {
+  font-size: 32px;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  transition: 0.5s;
+  margin-bottom: 15px;
+}
+.loginform input:focus {
+  border: 1px solid red;
+}
+.loginform button {
+  font-size: 32px;
+  padding: 5px;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.loginform button:hover {
+  color: white;
+  background-color: black;
+}

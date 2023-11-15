@@ -1,8 +1,9 @@
-import DataFetch from './DataFetch';
-import { useState } from 'react';
-import './Login.css';
+import { Link } from 'react-router-dom';
+import styles from './Login.module.css';
 
-function Login() {
+import { useState } from 'react';
+
+export default function Login() {
   // Save input from form
   const [formData, setFormData] = useState({
     username: '',
@@ -44,9 +45,8 @@ function Login() {
 
   return (
     <>
-      <div>
-        <h1>Welcome to the Authors Page</h1>
-        <form onSubmit={handleSubmit}>
+      <div className={styles.formContainer}>
+        <form className={styles.loginform} onSubmit={handleSubmit}>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -63,11 +63,9 @@ function Login() {
             value={formData.password}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     </>
   );
 }
-
-export default Login;
