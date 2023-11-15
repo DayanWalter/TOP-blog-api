@@ -40,14 +40,14 @@ export default function Comments({ postid }) {
       );
 
       if (response.ok) {
-        const json = await response.json();
-        console.log(json);
-
+        // Clear the form
         setFormData({
           user: '',
           text: '',
           post: '',
         });
+
+        // Refetch data for direct display
         refetch();
       } else {
         console.error('Failed to comment');
