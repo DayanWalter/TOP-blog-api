@@ -1,5 +1,5 @@
 import DataFetch from './DataFetch';
-import Post from './Post';
+import CardPost from './CardPost';
 export default function Posts() {
   const { loading, data, error } = DataFetch('http://localhost:3000/api/posts');
 
@@ -14,7 +14,7 @@ export default function Posts() {
           {data.allPosts.map(({ title, text, _id }) => (
             <li key={_id}>
               {console.log(`Post:${_id}`)}
-              <Post title={title} text={text} postid={_id} />
+              <CardPost title={title} text={text} postid={_id} />
             </li>
           ))}
         </>
