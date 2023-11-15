@@ -1,6 +1,5 @@
-import styles from './Home.module.css';
-import Posts from './Posts';
-export default function Home() {
+import styles from './Post.module.css';
+export default function Post() {
   return (
     <>
       <div className={styles.left}>
@@ -16,9 +15,7 @@ export default function Home() {
           seas of history and uncover the mysteries of these bygone vessels
         </h2>
       </div>
-      <div className={styles.middle}>
-        <Posts />
-      </div>
+      <div className={styles.middle}>MiddleSegment</div>
       <div className={styles.right}>
         <h2>
           Meet our passionate team of maritime enthusiasts! As dedicated
