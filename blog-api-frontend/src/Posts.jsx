@@ -10,14 +10,14 @@ export default function Posts() {
         <div>{`There is a problem fetching the data - ${error.message}`}</div>
       )}
       {data && (
-        <div>
+        <>
           {data.allPosts.map(({ title, text, _id }) => (
             <li key={_id}>
               {console.log(`Post:${_id}`)}
               <Post title={title} text={text} postid={_id} />
             </li>
           ))}
-        </div>
+        </>
       )}
     </>
   );
