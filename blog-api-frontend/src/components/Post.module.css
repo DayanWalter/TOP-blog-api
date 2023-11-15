@@ -1,0 +1,23 @@
+.left {
+  position: sticky;
+  top: 20%;
+  flex: 1;
+  text-align: center;
+  padding: 50px;
+}
+.middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 50px;
+  height: min-content;
+  flex: 2;
+}
+.right {
+  position: sticky;
+  top: 20%;
+  text-align: center;
+  padding: 50px;
+  flex: 1;
+}

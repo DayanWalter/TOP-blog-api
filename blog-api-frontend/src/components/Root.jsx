@@ -1,13 +1,11 @@
-import Home from './Home';
-import styles from './App.module.css';
-import Post from './Post';
-export default function App() {
+import styles from './Root.module.css';
+import { Outlet } from 'react-router-dom';
+export default function Root() {
   return (
     <div className={styles.main}>
       <header>The Maritime Wonders of the 15th Century</header>
       <main>
-        <Home />
-        {/* <Post /> */}
+        <Outlet />
       </main>
       <footer>Footer © Content</footer>
     </div>
