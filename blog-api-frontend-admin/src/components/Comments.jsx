@@ -18,19 +18,17 @@ export default function Posts() {
       )}
       {data && (
         <>
-          {data.allComments
-            .reverse()
-            .map(({ user, text, timestamp, _id, post }) => (
-              <li key={_id}>
-                <Comment
-                  user={user}
-                  text={text}
-                  timestamp={timestamp}
-                  commentid={_id}
-                  post={post}
-                />
-              </li>
-            ))}
+          {data.allComments.map(({ user, text, timestamp, _id, post }) => (
+            <li key={_id}>
+              <Comment
+                user={user}
+                text={text}
+                timestamp={timestamp}
+                commentid={_id}
+                post={post}
+              />
+            </li>
+          ))}
         </>
       )}
     </>

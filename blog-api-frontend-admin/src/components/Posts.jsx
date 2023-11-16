@@ -17,10 +17,14 @@ export default function Posts() {
       )}
       {data && (
         <>
-          {data.allPosts.map(({ title, text, _id }) => (
+          {data.allPosts.map(({ title, _id, timestamp, user }) => (
             <li key={_id}>
-              {console.log(`Post:${_id}`)}
-              <CardPost title={title} text={text} postid={_id} />
+              <CardPost
+                title={title}
+                postid={_id}
+                timestamp={timestamp}
+                user={user}
+              />
             </li>
           ))}
         </>
