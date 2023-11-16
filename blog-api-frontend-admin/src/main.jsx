@@ -8,6 +8,8 @@ import ErrorPage from './components/ErrorPage';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './components/Login.jsx';
+import Logout from './components/Logout.jsx';
+import Comments from './components/Comments.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,8 +26,16 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: '/logout',
+        element: <Logout />,
+      },
+      {
         path: '/posts',
         element: <Posts />,
+      },
+      {
+        path: '/comments',
+        element: <Comments />,
       },
 
       // {
