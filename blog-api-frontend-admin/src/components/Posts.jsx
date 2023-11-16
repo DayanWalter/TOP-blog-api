@@ -3,14 +3,10 @@ import DataFetch from './DataFetch';
 
 export default function Posts() {
   const token = localStorage.getItem('jwtoken');
+
   const { loading, data, error } = DataFetch(
     'http://localhost:3000/api/posts',
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    }
+    token
   );
 
   return (

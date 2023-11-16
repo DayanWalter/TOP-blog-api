@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function DataFetch(url, options = {}) {
+export default function DataFetch(url, token) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -8,14 +8,16 @@ export default function DataFetch(url, options = {}) {
   const fetchData = async () => {
     try {
       const response = await fetch(url, {
-        ...options,
         headers: {
-          ...options.headers,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
       if (!response.ok) {
-        throw new Error(`This is an HTTP error`);
+        if (token === null) {
+          throw new Error(`Unauthorized`);
+        }
+        throw new Error(`This is an HTTP error.`);
       }
       let actualData = await response.json();
       setData(actualData);
@@ -33,7 +35,6 @@ export default function DataFetch(url, options = {}) {
   }, [url]);
 
   const refetch = () => {
-    // Manuell Fetch auslösen
     setLoading(true);
     fetchData();
   };
