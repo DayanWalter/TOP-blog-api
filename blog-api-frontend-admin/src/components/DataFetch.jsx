@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
 
-export default function DataFetch(url) {
+export default function DataFetch(url, options = {}) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        ...options,
+        headers: {
+          ...options.headers,
+          'Content-Type': 'application/json',
+        },
+      });
       if (!response.ok) {
         throw new Error(`This is an HTTP error`);
       }

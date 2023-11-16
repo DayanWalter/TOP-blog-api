@@ -2,7 +2,16 @@ import CardPost from './CardPost';
 import DataFetch from './DataFetch';
 
 export default function Posts() {
-  const { loading, data, error } = DataFetch('http://localhost:3000/api/posts');
+  const token = localStorage.getItem('jwtoken');
+  const { loading, data, error } = DataFetch(
+    'http://localhost:3000/api/posts',
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
 
   return (
     <>
