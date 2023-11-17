@@ -11,6 +11,7 @@ import Login from './components/Login.jsx';
 import Logout from './components/Logout.jsx';
 import Comments from './components/Comments.jsx';
 import Post from './components/Post.jsx';
+import PostCreate from './components/PostCreate.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: '/comments',
         element: <Comments />,
+      },
+      {
+        path: '/post/create',
+        element: <PostCreate />,
       },
 
       {
