@@ -3,10 +3,10 @@ import { useLoaderData } from 'react-router-dom';
 export default function PostDelete() {
   const loaderData = useLoaderData();
   const postid = loaderData.postid;
-  function handleDelete() {
-    console.log(postid);
-  }
+
   const handleSubmit = async (event) => {
+    event.preventDefault;
+
     const response = await fetch(
       `http://localhost:3000/api/post/${postid}/delete`,
       {

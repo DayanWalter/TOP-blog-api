@@ -13,6 +13,7 @@ import Comments from './components/Comments.jsx';
 import Post from './components/Post.jsx';
 import PostCreate from './components/PostCreate.jsx';
 import PostDelete from './components/PostDelete.jsx';
+import PostUpdate from './components/PostUpdate.jsx';
 
 const router = createBrowserRouter([
   {
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/post/:postid/update',
-        element: <Post />,
+        element: <PostUpdate />,
         loader({ params }) {
           return params;
         },
