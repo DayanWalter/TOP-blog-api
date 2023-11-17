@@ -12,6 +12,7 @@ import Logout from './components/Logout.jsx';
 import Comments from './components/Comments.jsx';
 import Post from './components/Post.jsx';
 import PostCreate from './components/PostCreate.jsx';
+import PostDelete from './components/PostDelete.jsx';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,20 @@ const router = createBrowserRouter([
 
       {
         path: '/post/:postid',
+        element: <Post />,
+        loader({ params }) {
+          return params;
+        },
+      },
+      {
+        path: '/post/:postid/delete',
+        element: <PostDelete />,
+        loader({ params }) {
+          return params;
+        },
+      },
+      {
+        path: '/post/:postid/update',
         element: <Post />,
         loader({ params }) {
           return params;

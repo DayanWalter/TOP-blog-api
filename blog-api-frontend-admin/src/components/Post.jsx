@@ -1,5 +1,5 @@
 import DataFetch from './DataFetch';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 import styles from './Post.module.css';
 // import Comments from './Comments';
@@ -28,6 +28,8 @@ export default function Post() {
             <p>{data.post.timestamp}</p>
             {/* <Comments postid={postid} /> */}
           </div>
+          <Link to={`/post/${postid}/update`}> Update </Link>
+          <Link to={`/post/${postid}/delete`}> Delete </Link>
         </>
       )}
     </>
