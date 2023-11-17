@@ -26,7 +26,7 @@ export default function PostCreate() {
     user: '',
     title: '',
     text: '',
-    visible: true,
+    visible: '',
   });
 
   const handleChange = (event) => {
@@ -55,6 +55,7 @@ export default function PostCreate() {
         setFormData({
           title: '',
           text: '',
+          visible: '',
         });
       } else {
         console.error('Failed to post');
@@ -71,35 +72,57 @@ export default function PostCreate() {
         <div>{`There is a problem fetching the data - ${error.message}`}</div>
       )}
       {data && (
-        <div className={styles.comments}>
-          <p>Add Post:</p>
-          <form onSubmit={handleSubmit} action="/">
+        <div className={styles.post}>
+          <form
+            className={styles.createForm}
+            onSubmit={handleSubmit}
+            action="/"
+          >
+            <label htmlFor="title">Title:</label>
             <input
               type="text"
               id="title"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              placeholder="Title"
             />
             <br />
-            <input
+            <label htmlFor="text">Text:</label>
+            <textarea
               type="text"
               id="text"
               name="text"
               value={formData.text}
               onChange={handleChange}
-              placeholder="Text"
             />
             <br />
-            {/* <input
-              type="text"
-              id="user"
-              name="user"
-              value={foundUser._id}
-              readOnly={true}
-            /> */}
-            <button type="submit">Send</button>
+            <fieldset className={styles.fieldset}>
+              <legend>Post directly?</legend>
+              <div className={styles.radio}>
+                <label htmlFor="visible_true">
+                  Post
+                  <input
+                    type="radio"
+                    name="visible"
+                    id="visible_true"
+                    value={true}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label htmlFor="visible_false">
+                  Draft
+                  <input
+                    type="radio"
+                    name="visible"
+                    id="visible_false"
+                    value={false}
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+            </fieldset>
+
+            <button type="submit">Add Post</button>
           </form>
         </div>
       )}

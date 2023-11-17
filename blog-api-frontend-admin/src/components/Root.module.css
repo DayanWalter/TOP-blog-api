@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap');
-
 .main {
-  font-family: 'Old Standard TT', serif;
   display: flex;
   flex-direction: column;
   height: 100vh;
