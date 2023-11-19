@@ -27,16 +27,15 @@ export default function Comment() {
             <p>{data.comment.user}</p>
             <p>{data.comment._id}</p>
             <p>{data.comment.post.title}</p>
-
-            {/* <p>{data.post.text}</p>
-            <p>written by:</p>
-            <p>{data.post.user.username}</p>
-            <p>written at:</p>
-            <p>{data.post.timestamp}</p> */}
-            {/* <Comments postid={postid} /> */}
           </div>
-          <Link to={`/comment/${commentid}/update`}> Update </Link>
-          <Link to={`/comment/${commentid}/delete`}> Delete </Link>
+          <Link to={`/post/${postid}/comment/${commentid}/update`}>
+            {' '}
+            Update{' '}
+          </Link>
+          <Link to={`/post/${postid}/comment/${commentid}/delete`}>
+            {' '}
+            Delete{' '}
+          </Link>
         </>
       )}
     </>
