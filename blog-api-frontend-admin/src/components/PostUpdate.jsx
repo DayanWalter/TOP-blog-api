@@ -1,5 +1,4 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import DataFetch from './DataFetch';
 import styles from './PostCreate.module.css';
 
 // import Comment from './Comment';

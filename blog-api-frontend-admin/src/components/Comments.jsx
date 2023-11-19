@@ -1,8 +1,7 @@
-import CardPost from './CardPost';
-import Comment from './Comment';
+import CardComment from './CardComment';
 import DataFetch from './DataFetch';
 
-export default function Posts() {
+export default function Comments() {
   const token = localStorage.getItem('jwtoken');
 
   const { loading, data, error } = DataFetch(
@@ -20,7 +19,7 @@ export default function Posts() {
         <>
           {data.allComments.map(({ user, text, timestamp, _id, post }) => (
             <li key={_id}>
-              <Comment
+              <CardComment
                 user={user}
                 text={text}
                 timestamp={timestamp}
