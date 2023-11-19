@@ -16,6 +16,7 @@ import PostDelete from './components/PostDelete.jsx';
 import PostUpdate from './components/PostUpdate.jsx';
 import Comment from './components/Comment.jsx';
 import CommentDelete from './components/CommentDelete.jsx';
+import CommentUpdate from './components/CommentUpdate.jsx';
 // import Comment from './components/Comment.jsx';
 
 const router = createBrowserRouter([
@@ -80,6 +81,13 @@ const router = createBrowserRouter([
       {
         path: '/post/:postid/comment/:commentid/delete',
         element: <CommentDelete />,
+        loader({ params }) {
+          return params;
+        },
+      },
+      {
+        path: '/post/:postid/comment/:commentid/update',
+        element: <CommentUpdate />,
         loader({ params }) {
           return params;
         },
